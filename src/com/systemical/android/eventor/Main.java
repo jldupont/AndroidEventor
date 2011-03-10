@@ -1,14 +1,22 @@
 package com.systemical.android.eventor;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 import net.oauth.OAuthAccessor;
 import net.oauth.OAuthConsumer;
+import net.oauth.OAuthException;
 import net.oauth.OAuthServiceProvider;
+import net.oauth.client.OAuthClient;
+import net.oauth.client.httpclient4.HttpClient4;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class Main extends Activity {
 	
@@ -33,19 +41,31 @@ public class Main extends Activity {
 	    final Button button = (Button) findViewById(R.id.bAuthorize);
 	    button.setOnClickListener(new View.OnClickListener() {
 	        public void onClick(View v) {
+	        	try {
 	            doAuthorize();
+	        	} catch(Exception e) {
+	        		Context context = getApplicationContext();
+	        		CharSequence text = "Exception: "+e.toString();
+	        		int duration = Toast.LENGTH_SHORT;
+	        		
+	        		Toast toast = Toast.makeText(context, text, duration);
+	        	}
 	        }
 	    });
     }
     
-    protected void doAuthorize() {
-    	OAuthAccessor client = defaultAccessor();
+    protected void doAuthorize() throws IOException, OAuthException, URISyntaxException {
+    	OAuthAccessor accessor = defaultAccessor();
+
+    	OAuthClient client = new OAuthClient(new HttpClient4());
+        client.getRequestToken(accessor);
+
     	Intent intent = new Intent(Intent.ACTION_VIEW);
     	intent.setData(
     	      Uri.parse(
-    	           client.consumer.serviceProvider.userAuthorizationURL+
-    	           "?oauth_token="+client.requestToken+
-    	           "&oauth_callback="+client.consumer.callbackURL));
+    	           accessor.consumer.serviceProvider.userAuthorizationURL+
+    	           "?oauth_token="+accessor.requestToken+
+    	           "&oauth_callback="+accessor.consumer.callbackURL));
     	startActivity(intent);
     }
     
