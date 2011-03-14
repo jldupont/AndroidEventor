@@ -36,6 +36,30 @@ public class Main extends Activity {
         
         createAuthorizeButton();
     }
+
+    public void onResume() {
+    	super.onResume();
+
+    	//msg("begin: onResume");
+    	
+        // extract the OAUTH access token if it exists
+        Uri uri = this.getIntent().getData();
+        if(uri != null) {
+          String blessed_request_token = uri.getQueryParameter("oauth_token");
+          String blessed_request_secret = uri.getQueryParameter("oauth_token_secret");
+          msg("blessed oauth token:"+blessed_request_token);
+        }
+        
+        //msg("end: onResume");
+    }
+
+    
+    public void msg(String txt) {
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, txt, duration);
+        toast.show();    	
+    }
     
     protected void createAuthorizeButton() {
 	    final Button button = (Button) findViewById(R.id.bAuthorize);
