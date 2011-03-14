@@ -6,6 +6,6 @@
 	<classpathentry kind="lib" path="/opt/jars/oauth/core/provider/target/oauth-provider-20100601.jar" sourcepath="/opt/jars/oauth/core/provider/src"/>
 	<classpathentry kind="lib" path="/opt/jars/oauth/core/commons/target/oauth-20100601.jar"/>
 	<classpathentry kind="lib" path="/opt/jars/oauth/core/consumer/target/oauth-consumer-20100601.jar"/>
-	<classpathentry kind="lib" path="/opt/jars/oauth/core/httpclient4/target/oauth-httpclient4-20100601.jar"/>
+	<classpathentry kind="lib" path="/opt/jars/oauth/core/httpclient4/target/oauth-httpclient4-20100601.jar" sourcepath="/opt/jars/oauth/core/httpclient4/src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
