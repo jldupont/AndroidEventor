@@ -5,6 +5,9 @@
       android:versionName="1.0">
 
 	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
+	<uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"></uses-permission>
+	
 
     <application android:icon="@drawable/icon" android:label="@string/app_name">
         <activity android:name=".Main"
@@ -14,13 +17,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             
-		    <intent-filter>
-		         <action android:name="android.intent.action.VIEW" />
-		         <category android:name="android.intent.category.DEFAULT" />
-		         <category android:name="android.intent.category.BROWSABLE" />
-		         <data android:scheme="eventor-android-app"/>
-		     </intent-filter>
         </activity>
 
+		<receiver android:name="com.systemical.android.Eventor.IncomingCallReceiver"> 
+			<intent-filter> 
+				<action android:name="android.intent.action.PHONE_STATE"/>
+			</intent-filter> 
+		</receiver>
+
+		<service android:enabled="true" android:name=".MainService" />
+		
     </application>
 </manifest>
