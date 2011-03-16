@@ -37,7 +37,7 @@ public abstract class BaseThread extends Thread implements IAgent {
 	 * @param msg
 	 */
 	protected void send(int what, Object obj) {
-		Message m=Message.obtain(ms.handler, what, obj);
+		Message m=Message.obtain(ms.getHandler(), what, obj);
 		h.sendMessage(m);
 	}
 	

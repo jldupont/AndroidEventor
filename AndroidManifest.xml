@@ -19,13 +19,17 @@
             
         </activity>
 
-		<receiver android:name="com.systemical.android.Eventor.IncomingCallReceiver"> 
+		<receiver android:name="com.systemical.android.eventor.IncomingCallReceiver"> 
 			<intent-filter> 
 				<action android:name="android.intent.action.PHONE_STATE"/>
 			</intent-filter> 
 		</receiver>
-
-		<service android:enabled="true" android:name=".MainService" />
+		
+		<service android:enabled="true" android:name=".MainService">
+			<intent-filter> 
+				<action android:name="com.systemical.android.eventor.MainService"/>
+			</intent-filter> 		
+		</service>
 		
     </application>
 </manifest>

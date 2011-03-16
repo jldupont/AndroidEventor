@@ -30,10 +30,13 @@ public class MsgSwitch extends Thread implements IMsgSwitch {
 	
 	public Handler handler=null;
 	
-	public MsgSwitch(IFactory factory) {
+	public MsgSwitch() {
 		super();
-		f=factory;
-		im=(IMsgMap) f.get(IMsgMap.class);
+	}
+	
+	public void setFactory(IFactory _f) {
+		f=_f;
+		im=(IMsgMap) f.get(IMsgMap.class);		
 	}
 	
 	public Handler getHandler() {

@@ -34,6 +34,7 @@ public class Factory implements IFactory {
 		return null;		
 	}
 
+	@SuppressWarnings("unchecked")
 	public void set(Class classe, Object obj) {
 		map.put(classe, obj);
 	}
