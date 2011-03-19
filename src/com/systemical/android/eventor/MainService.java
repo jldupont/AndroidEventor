@@ -6,13 +6,6 @@
 package com.systemical.android.eventor;
 
 
-import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.InetAddress;
-import java.net.MulticastSocket;
-import java.net.NetworkInterface;
-
-import com.systemical.android.net.NetUtil;
 import com.systemical.android.system.BaseReceiver;
 import com.systemical.android.system.BaseService;
 
@@ -40,38 +33,57 @@ public class MainService extends BaseService {
 		BaseReceiver.setMainContext(THIS_SERVICE);
 	
 		ne=new NetworkEvent(this);
-		no=new Notifier();
+		no=new Notifier();		
 	}
 	
 	protected int processIntent(Intent intent, int flags, int startId) {
-		Log.v(TAG, "processIntent: "+intent);
+		//Log.v(TAG, "processIntent: "+intent);
 		return START_STICKY;
 	}
 
 	
 	protected void preprocess(String type, Bundle b) {
-		Log.v(TAG, "preprocess: START");
+		//Log.v(TAG, "preprocess: START");
 		
-		String packetData=null;
 		if (type!=null) {
 			if (type.equals("incomingcall")) {
-				try{
-					packetData=no.prepare(b);
-					
-					Log.v(TAG, "sending packet!");
-					ne.sendData(packetData);
-				}catch(Exception e) {
-					Log.e(TAG, "error sending packet: "+e.toString());
-				}
+				h_call(b);
 			}
+			if (type.equals("wifi")) {
+				h_wifi(b);
+			}			
 		}
-		Log.v(TAG, "preprocess: END");
+		//Log.v(TAG, "preprocess: END");
+	}//
+	
+	protected void h_wifi(Bundle b) {
+		String state=b.getString("state");
+		
+		Log.v(TAG, "wifi: "+state);
+		
+		if (state.equals("connected"))
+			ne.refresh();
+	}
+	
+	protected void h_call(Bundle b) {
+		
+		String packetData=null;		
+		try{	
+			packetData=no.prepare(b);
+			ne.sendData(packetData);
+			Log.v(TAG, "packet sent!");			
+		}catch(Exception e) {
+			Log.e(TAG, "error sending packet: "+e.toString());
+		}		
 	}//
 	
 	@Override
 	protected void onHandleIntent(Intent arg0) {
-		Log.v(TAG, "onHandleIntent: "+arg0);
+		//Log.v(TAG, "onHandleIntent: "+arg0);
 		
 	}
 	
+	public void onDestroy () {
+		Log.v(TAG, "destroyed...");
+	}
 }///

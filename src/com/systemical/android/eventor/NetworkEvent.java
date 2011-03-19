@@ -44,6 +44,12 @@ public class NetworkEvent {
 		maybeRefreshSocket();
 	}
 	
+	public void refresh() {
+		reset();
+		maybeRefreshNetworkInterface();
+		maybeRefreshSocket();
+	}
+	
 	protected void maybeRefreshSocket() {
 		if (multicastSocket==null)
 			try{ 
@@ -90,6 +96,7 @@ public class NetworkEvent {
 		try {
 			multicastSocket.send(notif);
 		}catch(IOException e1) {
+			Log.v(TAG, "Error sending: "+e1.toString());
 			// let's try one more time
 			reset();
 			maybeRefreshNetworkInterface();

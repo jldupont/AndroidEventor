@@ -7,9 +7,12 @@
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
 	<uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"></uses-permission>
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"></uses-permission>
 	
-
+	
     <application android:icon="@drawable/icon" android:label="@string/app_name">
+    
+    <!-- 
         <activity android:name=".Main"
                   android:label="@string/app_name">
             <intent-filter>
@@ -18,10 +21,24 @@
             </intent-filter>
             
         </activity>
-
+ 	-->
+ 	
 		<receiver android:name="com.systemical.android.eventor.IncomingCallReceiver"> 
 			<intent-filter> 
 				<action android:name="android.intent.action.PHONE_STATE"/>
+			</intent-filter> 
+		</receiver>
+
+		<receiver android:name="com.systemical.android.eventor.BootReceiver"> 
+			<intent-filter> 
+				<action android:name="android.intent.action.BOOT_COMPLETED"/>
+			</intent-filter> 
+		</receiver>
+
+
+		<receiver android:name="com.systemical.android.eventor.WifiReceiver"> 
+			<intent-filter> 
+				<action android:name="android.net.wifi.STATE_CHANGE"/>
 			</intent-filter> 
 		</receiver>
 		
