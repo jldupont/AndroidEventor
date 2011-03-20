@@ -17,7 +17,6 @@ import android.util.Log;
 public class MainService extends BaseService {
 
 	final static String THIS_SERVICE="com.systemical.android.eventor.MainService";
-	
 	final static String TAG="Eventor.MainService";
 	
 	NetworkEvent ne=null;
@@ -59,8 +58,6 @@ public class MainService extends BaseService {
 	protected void h_wifi(Bundle b) {
 		String state=b.getString("state");
 		
-		Log.v(TAG, "wifi: "+state);
-		
 		if (state.equals("connected"))
 			ne.refresh();
 	}
@@ -77,7 +74,6 @@ public class MainService extends BaseService {
 		}		
 	}//
 	
-	@Override
 	protected void onHandleIntent(Intent arg0) {
 		//Log.v(TAG, "onHandleIntent: "+arg0);
 		
