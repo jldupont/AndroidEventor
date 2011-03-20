@@ -27,8 +27,7 @@ public class MainService extends BaseService {
 	}
 	
 	public void onCreate() {
-		Log.v(TAG, "onCreate");
-		
+		//Log.v(TAG, "onCreate");
 		BaseReceiver.setMainContext(THIS_SERVICE);
 	
 		ne=new NetworkEvent(this);
