@@ -71,7 +71,7 @@ public class MainService extends BaseService {
 		try{	
 			packetData=no.prepare(b);
 			ne.sendData(packetData);
-			Log.v(TAG, "packet sent!");			
+			Log.v(TAG, "packet sent: "+packetData);			
 		}catch(Exception e) {
 			Log.e(TAG, "error sending packet: "+e.toString());
 		}		

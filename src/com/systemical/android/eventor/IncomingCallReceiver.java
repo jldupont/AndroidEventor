@@ -13,19 +13,30 @@ import android.util.Log;
 
 public class IncomingCallReceiver extends BaseReceiver {
 
+	String thisPhoneNumber=null;
+	
+	TelephonyManager mTelephonyMgr=null;
+	
 	public IncomingCallReceiver() {
 		super();
+		
+ 
 	}
 	
 	final String TAG="Eventor.IncomingCallReceiver";
 	
 	public void onReceive(Context context, Intent intent) {
-		Log.e(TAG, "onReceive: START");
+		//Log.e(TAG, "onReceive: START");
 		
 		Bundle bundle = intent.getExtras();
 		
         if(null == bundle)
                 return;
+        
+        if (mTelephonyMgr==null) {
+            mTelephonyMgr = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);    
+            thisPhoneNumber=mTelephonyMgr.getLine1Number();
+        }
         try {
 	        String state = bundle.getString(TelephonyManager.EXTRA_STATE);
 	        String phoneNumber=null;
@@ -37,13 +48,14 @@ public class IncomingCallReceiver extends BaseReceiver {
 	        sendMsg(context, "type", "incomingCall"
 	        				,"state",  state
 	        				,"number", phoneNumber
+	        				,"phone", thisPhoneNumber
 	        		);
 	        
         } catch(Exception e) {
         	Log.e(TAG, "Exception<< "+e.toString());
         }
         
-        Log.e(TAG, "onReceive: END");
+        //Log.e(TAG, "onReceive: END");
 	}//
 	
 }//
