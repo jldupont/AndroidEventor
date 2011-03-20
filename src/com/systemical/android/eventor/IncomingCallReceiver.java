@@ -19,8 +19,6 @@ public class IncomingCallReceiver extends BaseReceiver {
 	
 	public IncomingCallReceiver() {
 		super();
-		
- 
 	}
 	
 	final String TAG="Eventor.IncomingCallReceiver";
