@@ -26,8 +26,8 @@ public class NetworkEvent {
         new byte[] {(byte) 239,(byte) 0,(byte) 0,(byte) 1};
     private static final int EVENTOR_PORT = 6666;
 	NetworkInterface ni=null;
-	private MulticastSocket multicastSocket;
-	private InetAddress groupAddress;
+	private MulticastSocket multicastSocket=null;
+	private InetAddress groupAddress=null;
 	
 	
 	public NetworkEvent(Context context) {
