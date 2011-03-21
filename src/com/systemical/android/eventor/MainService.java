@@ -27,11 +27,12 @@ public class MainService extends BaseService {
 	}
 	
 	public void onCreate() {
-		//Log.v(TAG, "onCreate");
+		Log.v(TAG, "onCreate: BEGIN");
 		BaseReceiver.setMainContext(THIS_SERVICE);
 	
 		ne=new NetworkEvent(this);
 		no=new Notifier();		
+		Log.v(TAG, "onCreate: END");
 	}
 	
 	protected int processIntent(Intent intent, int flags, int startId) {
@@ -74,7 +75,7 @@ public class MainService extends BaseService {
 	}//
 	
 	protected void onHandleIntent(Intent arg0) {
-		//Log.v(TAG, "onHandleIntent: "+arg0);
+		Log.v(TAG, "onHandleIntent: "+arg0);
 		
 	}
 	

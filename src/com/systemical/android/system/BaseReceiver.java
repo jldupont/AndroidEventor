@@ -10,6 +10,10 @@ import android.os.Bundle;
 
 public abstract class BaseReceiver extends BroadcastReceiver {
 
+	public BaseReceiver() {
+		super();
+	}
+	
 	/**
 	 * Must be provisioned at startup
 	 */

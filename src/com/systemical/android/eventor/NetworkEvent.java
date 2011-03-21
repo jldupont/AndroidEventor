@@ -18,14 +18,16 @@ import android.util.Log;
 
 public class NetworkEvent {
 
+	// CONSTANTS
 	private static final String TAG="Eventor.NetworkEvent";
-	protected Context c=null;
-	NetUtil net=null;
-
     private static final byte[] EVENTOR_ADDR =
         new byte[] {(byte) 239,(byte) 0,(byte) 0,(byte) 1};
     private static final int EVENTOR_PORT = 6666;
-	NetworkInterface ni=null;
+    
+    // VARIABLES
+	protected Context c=null;
+	private NetUtil net=null;    
+    private NetworkInterface ni=null;
 	private MulticastSocket multicastSocket=null;
 	private InetAddress groupAddress=null;
 	

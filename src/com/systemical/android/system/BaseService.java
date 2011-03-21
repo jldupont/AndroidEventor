@@ -3,6 +3,7 @@ package com.systemical.android.system;
 import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 public abstract class BaseService extends IntentService {
 
@@ -13,7 +14,7 @@ public abstract class BaseService extends IntentService {
 	}
 
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		//Log.v(TAG, "onStartCommand: start - intent: "+ intent);
+		Log.v(TAG, "onStartCommand: END - intent: "+ intent);
 		
 		Bundle b=intent.getBundleExtra("msg");
 		if (b!=null) {
@@ -21,7 +22,9 @@ public abstract class BaseService extends IntentService {
 			preprocess(type, b);
 		}
 		
-        return processIntent(intent, flags, startId);
+        int result=processIntent(intent, flags, startId);
+        Log.v(TAG, "onStartCommand: END - intent: "+ intent);
+        return result;
 	}//
 
 	protected abstract void preprocess(String type, Bundle b);

@@ -10,6 +10,10 @@ import com.systemical.android.system.BaseReceiver;
 
 public class BootReceiver extends BaseReceiver {
 
+	public BootReceiver() {
+		super();
+	}
+	
 	public void onReceive(Context context, Intent intent) {
 
 		context.startService(new Intent(context, MainService.class));
