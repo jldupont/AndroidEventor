@@ -14,12 +14,16 @@ public abstract class BaseService extends IntentService {
 	}
 
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		Log.v(TAG, "onStartCommand: END - intent: "+ intent);
+		Log.v(TAG, "onStartCommand: START - intent: "+ intent);
 		
-		Bundle b=intent.getBundleExtra("msg");
-		if (b!=null) {
-			String type=b.getString("type").toLowerCase();
-			preprocess(type, b);
+		if (null==intent) {
+			Log.v(TAG, "onStartCommand: received NULL intent...");
+		} else {
+			Bundle b=intent.getBundleExtra("msg");
+			if (b!=null) {
+				String type=b.getString("type").toLowerCase();
+				preprocess(type, b);
+			}			
 		}
 		
         int result=processIntent(intent, flags, startId);
