@@ -41,6 +41,13 @@
 			</intent-filter> 
 		</receiver>
 		
+		<receiver android:name="com.systemical.android.eventor.WifiReceiver">
+			<intent-filter> 
+				<action android:name="android.net.wifi.supplicant.CONNECTION_CHANGE"/>
+			</intent-filter> 
+		</receiver>
+		
+		
 		<service android:enabled="true" android:name=".MainService">
 			<intent-filter> 
 				<action android:name="com.systemical.android.eventor.MainService"/>

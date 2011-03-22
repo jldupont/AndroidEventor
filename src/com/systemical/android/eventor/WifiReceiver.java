@@ -20,19 +20,32 @@ public class WifiReceiver extends BaseReceiver {
 		super();
 	}
 	
-	@Override
 	public void onReceive(Context context, Intent intent) {
+		
+		if (null==intent)
+			return;
+		
 		final String action = intent.getAction();
 		Log.v(TAG, "action: "+action);
 		
 		if (action.equals(WifiManager.NETWORK_STATE_CHANGED_ACTION)) {
-		  NetworkInfo info = (NetworkInfo)intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
-		  String state=info.getState().equals(NetworkInfo.State.CONNECTED) ? "connected":"disconnected";
+		  String state=_getState(intent);
 		  Log.v(TAG, "sending msg, state:"+state);
 		  sendMsg(context, "type", "wifi"
         				,"state",  state);		  
 		}		
-		
-	}
+		if (action.equals(WifiManager.SUPPLICANT_CONNECTION_CHANGE_ACTION)) {
+			  String state=intent.getBooleanExtra(WifiManager.EXTRA_SUPPLICANT_CONNECTED, false) ? "connected":"disconnected";
+			  Log.v(TAG, "sending msg, state:"+state);
+			  sendMsg(context, "type", "wifi"
+	        				,"state",  state);			
+		}
+	}///
 
+	protected String _getState(Intent intent) {
+	  NetworkInfo info = (NetworkInfo)intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
+	  String state=info.getState().equals(NetworkInfo.State.CONNECTED) ? "connected":"disconnected";
+	  return state;
+	}
+	
 }///
