@@ -46,8 +46,11 @@ public class MainService extends BaseService {
 		
 		if (type!=null) {
 			if (type.equals("incomingcall")) {
-				h_call(b);
+				sendNotif(b);
 			}
+			if (type.equals("sms")) {
+				sendNotif(b);
+			}			
 			if (type.equals("wifi")) {
 				h_wifi(b);
 			}			
@@ -62,7 +65,7 @@ public class MainService extends BaseService {
 			ne.refresh();
 	}
 	
-	protected void h_call(Bundle b) {
+	protected void sendNotif(Bundle b) {
 		
 		String packetData=null;		
 		try{	

@@ -26,26 +26,32 @@ public class Main extends Activity {
     }
 
     public void onStart(){
+    	super.onStart();
     	Log.d(TAG, "onStart");
     }
     
     public void onResume() {
+    	super.onResume();
     	Log.d(TAG, "onResume");
     }
     
     public void onPause() {
+    	super.onPause();
     	Log.d(TAG, "onPause");    	
     }
     
     public void onStop() {
+    	super.onStop();
     	Log.d(TAG, "onStop");    	
     }
     
     public void onDestroy() {
+    	super.onDestroy();
     	Log.d(TAG, "onDestroy");    	
     }
     
     public void onRestart() {
+    	super.onRestart();
     	Log.d(TAG, "onRestart");    	
     }
     
